@@ -1,0 +1,5 @@
+name: MapperJoinChecker
+version: @version@
+main: xyz.n7mn.dev.mapperjoinchecker.MapperJoinChecker
+authors: [ 7mi_chan ]
+description: MapperJoinChecker for 1.12+
