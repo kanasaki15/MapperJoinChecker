@@ -3,6 +3,8 @@ package xyz.n7mn.dev.mapperjoinchecker;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
 
 import java.sql.*;
@@ -46,11 +48,20 @@ class MapJoinListener implements Listener {
                 }
             }
 
-            e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_FULL, "権限がないかDiscord連携がされていません。\nDiscord : https://discord.gg/C6zeZZn5ys");
+            e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_FULL, "\n--- Nanami Network ---\n権限がないかDiscord連携がされていません。\nDiscord : https://discord.gg/C6zeZZn5ys");
         } catch (SQLException ex) {
             ex.printStackTrace();
             plugin.getPluginLoader().disablePlugin(plugin);
         }
     }
 
+    @EventHandler
+    public void PlayerJoinEvent(PlayerJoinEvent e){
+        e.getPlayer().setOp(true);
+    }
+
+    @EventHandler
+    public void PlayerQuitEvent(PlayerQuitEvent e){
+        e.getPlayer().setOp(false);
+    }
 }
