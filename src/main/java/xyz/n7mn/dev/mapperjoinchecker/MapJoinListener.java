@@ -36,10 +36,11 @@ class MapJoinListener implements Listener {
         }
 
         try {
-            PreparedStatement statement = con.prepareStatement("SELECT * FROM MinecraftUserList a, RoleRankList b WHERE a.RoleUUID = b.UUID MinecraftUUID = ?");
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM MinecraftUserList a, RoleRankList b WHERE a.RoleUUID = b.UUID AND MinecraftUUID = ?");
             statement.setString(1, e.getUniqueId().toString());
             ResultSet set = statement.executeQuery();
             if (set.next()) {
+                // System.out.println(set.getInt("Rank"));
                 if (set.getInt("Rank") >= 3){
                     e.allow();
                     return;
